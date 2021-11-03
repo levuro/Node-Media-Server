@@ -70,24 +70,32 @@ class NodeHttpServer {
       app.use(Express.static(config.http.webroot));
     }
 
-    this.httpServer = Http.createServer(app);
+    this.app = app;
 
-    /**
-     * ~ openssl genrsa -out privatekey.pem 1024
-     * ~ openssl req -new -key privatekey.pem -out certrequest.csr
-     * ~ openssl x509 -req -in certrequest.csr -signkey privatekey.pem -out certificate.pem
-     */
-    if (this.config.https) {
-      let options = {
-        key: Fs.readFileSync(this.config.https.key),
-        cert: Fs.readFileSync(this.config.https.cert)
-      };
-      this.sport = config.https.port ? config.https.port : HTTPS_PORT;
-      this.httpsServer = Https.createServer(options, app);
-    }
+    // this.httpServer = Http.createServer(app);
+    //
+    // /**
+    //  * ~ openssl genrsa -out privatekey.pem 1024
+    //  * ~ openssl req -new -key privatekey.pem -out certrequest.csr
+    //  * ~ openssl x509 -req -in certrequest.csr -signkey privatekey.pem -out certificate.pem
+    //  */
+    // if (this.config.https) {
+    //   let options = {
+    //     key: Fs.readFileSync(this.config.https.key),
+    //     cert: Fs.readFileSync(this.config.https.cert)
+    //   };
+    //   this.sport = config.https.port ? config.https.port : HTTPS_PORT;
+    //   this.httpsServer = Https.createServer(options, app);
+    // }
+  }
+
+  addRouter(prefix = '/', router) {
+    this.app.use(prefix, router)
   }
 
   run() {
+    this.httpServer = Http.createServer(this.app);
+
     this.httpServer.listen(this.port, () => {
       Logger.log(`Node Media Http Server started on port: ${this.port}`);
     });
