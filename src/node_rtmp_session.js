@@ -633,6 +633,11 @@ class NodeRtmpSession {
             this.audioChannels
           }ch`
         );
+        context.nodeEvent.emit('handleAudio', this.id, {
+          codec: this.audioCodecName,
+          freq: this.audioSamplerate,
+          chan: this.audioChannels
+        });
       }
     }
 
@@ -658,6 +663,11 @@ class NodeRtmpSession {
           this.audioChannels
         }ch`
       );
+      context.nodeEvent.emit('handleAudio', this.id, {
+        codec: this.audioCodecName,
+        freq: this.audioSamplerate,
+        chan: this.audioChannels
+      });
     }
 
     let packet = RtmpPacket.create();
@@ -744,6 +754,11 @@ class NodeRtmpSession {
           this.videoWidth
         }x${this.videoHeight}`
       );
+      context.nodeEvent.emit('handleVideo', this.id, {
+        codec: this.videoCodecName,
+        size: `${this.videoWidth}x${this.videoHeight}`,
+        fps: this.videoFps,
+      });
     }
 
     let packet = RtmpPacket.create();
