@@ -89,7 +89,7 @@ class NodeHttpServer {
     // }
   }
 
-  addRouter(prefix = '/', router, middleware = null) {
+  addRouter(router, prefix = '/', middleware = null) {
     if (middleware) {
       this.app.use(prefix, middleware, router)
     } else {
