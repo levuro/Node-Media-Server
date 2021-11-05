@@ -110,6 +110,10 @@ class NodeMediaServer {
   getSession(id) {
     return context.sessions.get(id);
   }
+
+  getSessions() {
+    return context.sessions;
+  }
 }
 
 module.exports = {

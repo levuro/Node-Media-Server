@@ -15,6 +15,7 @@ function generateNewSessionID() {
     for (let i = 0; i < 8; i++) {
       sessionID += possible.charAt((Math.random() * numPossible) | 0);
     }
+    sessionID += new Date().getTime();
   } while (context.sessions.has(sessionID));
   return sessionID;
 }
