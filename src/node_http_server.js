@@ -19,6 +19,7 @@ const HTTPS_PORT = 443;
 const HTTP_MEDIAROOT = './media';
 const Logger = require('./node_core_logger');
 const context = require('./node_core_ctx');
+const morgan = require('morgan');
 
 const streamsRoute = require('./api/routes/streams');
 const serverRoute = require('./api/routes/server');
@@ -32,6 +33,7 @@ class NodeHttpServer {
 
     let app = Express();
     app.use(bodyParser.json());
+    app.use(morgan('combined'));
 
     app.use(bodyParser.urlencoded({ extended: true }));
 

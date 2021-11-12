@@ -1,5 +1,4 @@
 #!/usr/bin/env node 
-
 const NodeMediaServer = require('..');
 let argv = require('minimist')(process.argv.slice(2),
   {
@@ -61,7 +60,7 @@ const config = {
 };
 
 
-let nms = new NodeMediaServer(config);
+let nms = new NodeMediaServer.NodeMediaServer(config);
 nms.run();
 
 nms.on('preConnect', (id, args) => {
