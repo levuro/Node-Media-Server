@@ -98,6 +98,10 @@ class NodeHttpServer {
       this.app.use(prefix, router)
     }
   }
+  
+  getServer() {
+      return this.app;
+  }
 
   run() {
     this.httpServer = Http.createServer(this.app);
